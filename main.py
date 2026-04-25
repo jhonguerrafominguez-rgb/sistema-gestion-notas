@@ -1,23 +1,25 @@
+estudiantes = []
+
 def registrar_estudiante():
-    """Registra un nuevo estudiante con nombre e ID."""  # Docstring: explica la función
-    print("\n--- Registro de Estudiante ---")  # Muestra un encabezado en consola
-    nombre = input("Ingrese el nombre del estudiante: ")  # Pide al usuario el nombre
-    id_estudiante = input("Ingrese el ID del estudiante: ")  # Pide al usuario el ID
-    # Aquí guardaremos los datos en una lista más adelante
-    print(f"Estudiante {nombre} registrado con éxito.")  # Confirma el registro
+    """Registra un nuevo estudiante y lo añade a la lista."""
+    nombre = input("Nombre del estudiante: ")
+    id_estu = input("ID del estudiante: ")
+    estudiantes.append({"id": id_estu, "nombre": nombre, "notas": []})
+    print(f"Estudiante {nombre} registrado.")
 
-def main():
-    # Bucle principal del programa: se repite hasta que el usuario decida salir
-    while True:
-        print("\n1. Registrar Estudiante")  # Opción para registrar
-        print("2. Salir")  # Opción para terminar el programa
-        opcion = input("Seleccione una opción: ")  # Captura la elección del usuario
-        
-        if opcion == "1":
-            registrar_estudiante()  # Llama a la función de registro
-        elif opcion == "2":
-            break  # Sale del bucle y termina el programa
-
-# Punto de entrada del programa
-if __name__ == "__main__":
-    main()
+def ingresar_notas():
+    """Busca un estudiante por ID e ingresa sus notas (0-5)."""
+    id_buscar = input("Ingrese el ID del estudiante para calificar: ")
+    for estu in estudiantes:
+        if estu["id"] == id_buscar:
+            try:
+                nota = float(input(f"Ingrese la nota para {estu['nombre']} (0-5): "))
+                if 0 <= nota <= 5:
+                    estu["notas"].append(nota)
+                    print("Nota agregada con éxito.")
+                else:
+                    print("Error: La nota debe estar entre 0 y 5.")
+            except ValueError:
+                print("Error: Ingrese un valor numérico válido.")
+            return
+    print("Estudiante no encontrado.")
