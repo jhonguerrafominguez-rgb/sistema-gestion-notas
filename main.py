@@ -37,3 +37,12 @@ def calcular_promedio():
             print(f"Promedio: {promedio:.2f} - Estado: {estado}")
             return
     print("Estudiante no encontrado.")
+
+def generar_reporte():
+    """Muestra una tabla con todos los estudiantes y sus resultados."""
+    print("\n{:<10} {:<20} {:<15} {:<10}".format("ID", "Nombre", "Promedio", "Estado"))
+    print("-" * 55)
+    for estu in estudiantes:
+        promedio = sum(estu["notas"]) / len(estu["notas"]) if estu["notas"] else 0
+        estado = "Aprobado" if promedio >= 3.0 else "Reprobado"
+        print("{:<10} {:<20} {:<15.2f} {:<10}".format(estu["id"], estu["nombre"], promedio, estado))
