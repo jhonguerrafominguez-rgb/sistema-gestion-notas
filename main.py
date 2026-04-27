@@ -1,3 +1,5 @@
+import json
+
 estudiantes = []
 
 def registrar_estudiante():
@@ -46,3 +48,18 @@ def generar_reporte():
         promedio = sum(estu["notas"]) / len(estu["notas"]) if estu["notas"] else 0
         estado = "Aprobado" if promedio >= 3.0 else "Reprobado"
         print("{:<10} {:<20} {:<15.2f} {:<10}".format(estu["id"], estu["nombre"], promedio, estado))
+
+def guardar_datos():
+    """Guarda la lista de estudiantes en un archivo JSON."""
+    with open("notas.json", "w") as f:
+        json.dump(estudiantes, f, indent=4)
+    print("Datos guardados en notas.json")
+
+def cargar_datos():
+    """Carga los datos desde el archivo JSON si existe."""
+    global estudiantes
+    try:
+        with open("notas.json", "r") as f:
+            estudiantes = json.load(f)
+    except FileNotFoundError:
+        estudiantes = []
