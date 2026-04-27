@@ -62,4 +62,35 @@ def cargar_datos():
         with open("notas.json", "r") as f:
             estudiantes = json.load(f)
     except FileNotFoundError:
-        estudiantes = []
+        estudiantes = [] 
+
+
+def main():
+    cargar_datos()  # Carga la información guardada al iniciar [cite: 36]
+    while True:
+        print("\n--- SISTEMA DE GESTIÓN DE NOTAS ---")
+        print("1. Registrar Estudiante")
+        print("2. Ingresar Notas")
+        print("3. Calcular Promedio")
+        print("4. Generar Reporte")
+        print("5. Guardar y Salir")
+        
+        opcion = input("Seleccione una opción: ")
+        
+        if opcion == "1":
+            registrar_estudiante()
+        elif opcion == "2":
+            ingresar_notas()
+        elif opcion == "3":
+            calcular_promedio()
+        elif opcion == "4":
+            generar_reporte()
+        elif opcion == "5":
+            guardar_datos()
+            print("¡Hasta luego!")
+            break
+        else:
+            print("Opción no válida.")
+
+if __name__ == "__main__":
+    main()
