@@ -23,3 +23,17 @@ def ingresar_notas():
                 print("Error: debe ingresar un número.")
             return
     print("Estudiante no encontrado.")
+    
+def calcular_promedio():
+    """Calcula el promedio de un estudiante y define su estado."""
+    id_buscar = input("ID del estudiante: ")
+    for estu in estudiantes:
+        if estu["id"] == id_buscar:
+            if not estu["notas"]:
+                print("El estudiante no tiene notas.")
+                return
+            promedio = sum(estu["notas"]) / len(estu["notas"])
+            estado = "Aprobado" if promedio >= 3.0 else "Reprobado"
+            print(f"Promedio: {promedio:.2f} - Estado: {estado}")
+            return
+    print("Estudiante no encontrado.")
